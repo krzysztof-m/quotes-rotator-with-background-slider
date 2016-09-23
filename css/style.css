@@ -76,6 +76,14 @@ body {
 /*=================================
 \* 1. Background slider
 /*===============================*/
+#background-slider:after {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.7);
+    z-index: -1;
+}
 .background-slider-item {
     position: fixed;
     width: 100%;
@@ -83,13 +91,8 @@ body {
     background-position: center center;
     z-index: -2;
 }
-.background-slider-item:after {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.7);
-    z-index: -1;
+.item-under {
+    z-index: -99 !important;
 }
 /*=================================
 \* 2. Quotes rotator
@@ -98,7 +101,7 @@ body {
     position: relative;
     max-width: 600px;
     background-color: #fff;
-    padding: 30px 50px;
+    padding: 50px 50px;
     margin: 100px auto 0;
 }
 .rotator-progress {
@@ -109,11 +112,23 @@ body {
     background-color: #39f;
     width: 100%;
 }
-.quote-text {
+blockquote {
     font-family: 'Nothing You Could Do', cursive;
     font-size: 25px;
     line-height: 30px;
 }
 .quote-author {
     font-size: .6em;
+}
+.rotator-controls {
+    margin: 20px auto 0;
+    text-align: center;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 2px #39f solid;
+    color: #39f;
+    cursor: pointer;
 }

@@ -52,8 +52,9 @@ $(document).ready(function() {
         $rotatorWrapper = $('.rotator-wrapper'),
         $quoteText = $rotatorWrapper.find('.quote-text'),
         $quoteAuthor = $rotatorWrapper.find('.quote-author'),
-        $randomBtn = $('#random-quote');
-        quotesArr = [];
+        $randomBtn = $('#random-quote'),
+        quotesArr = [],
+        prevRandom;
 
     quotes.forEach(function(quote) {
         var $li = $('<li class="background-slider-item" />');
@@ -68,9 +69,15 @@ $(document).ready(function() {
     
     function randomQuote() {
         var random = Math.floor(Math.random() * quotes.length);
+        while(random === prevRandom) {
+            random = Math.floor(Math.random() * quotes.length);
+        }
         $quoteText.text(quotes[random]["quote"]);
         $quoteAuthor.text(quotes[random]["author"]);
-        quotesArr[random]["bgImg"].fadeIn().siblings().hide();
+        quotesArr[random]["bgImg"].addClass('item-under').show().siblings().filter(':visible').fadeOut(function() {
+            quotesArr[random]["bgImg"].removeClass('item-under');
+        });;
+        prevRandom = random;
     }
     
     $randomBtn.on('click', randomQuote);
