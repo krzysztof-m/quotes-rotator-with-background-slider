@@ -53,6 +53,7 @@ $(document).ready(function() {
         $quoteText = $rotatorWrapper.find('.quote-text'),
         $quoteAuthor = $rotatorWrapper.find('.quote-author'),
         $randomBtn = $('#random-quote'),
+        $tweetBtn = $('#tweet'),
         quotesArr = [],
         prevRandom;
 
@@ -72,8 +73,12 @@ $(document).ready(function() {
         while(random === prevRandom) {
             random = Math.floor(Math.random() * quotes.length);
         }
-        $quoteText.text(quotes[random]["quote"]);
-        $quoteAuthor.text(quotes[random]["author"]);
+        $('blockquote').fadeOut(function() {
+            $quoteText.text(quotes[random]["quote"]);
+            $quoteAuthor.text(quotes[random]["author"]);
+            $('blockquote').fadeIn();
+        });
+        
         quotesArr[random]["bgImg"].addClass('item-under').show().siblings().filter(':visible').fadeOut(function() {
             quotesArr[random]["bgImg"].removeClass('item-under');
         });;
@@ -81,7 +86,10 @@ $(document).ready(function() {
     }
     
     $randomBtn.on('click', randomQuote);
-    
+    $tweetBtn.on('click', function() {
+        var url = 'https://twitter.com/intent/tweet?text="' + quotes[prevRandom]["quote"] + '" - ' + quotes[prevRandom]["author"];
+        window.open(url, 'Share', 'width=550, height=400, toolbar=0, scrollbars=1 ,location=0 ,statusbar=0,menubar=0, resizable=0'); 
+    });
     randomQuote();
     
 });
