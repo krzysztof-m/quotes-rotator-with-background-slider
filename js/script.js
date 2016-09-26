@@ -55,6 +55,7 @@ $(document).ready(function() {
         $randomBtn = $('#random-quote'),
         $tweetBtn = $('#tweet'),
         quotesArr = [],
+        fadeTime = 300,
         prevRandom;
 
     quotes.forEach(function(quote) {
@@ -73,13 +74,13 @@ $(document).ready(function() {
         while(random === prevRandom) {
             random = Math.floor(Math.random() * quotes.length);
         }
-        $('blockquote').fadeOut(function() {
+        $('blockquote').fadeOut(fadeTime,function() {
             $quoteText.text(quotes[random]["quote"]);
             $quoteAuthor.text(quotes[random]["author"]);
-            $(this).fadeIn();
+            $(this).fadeIn(fadeTime);
         });
         
-        quotesArr[random]["bgImg"].addClass('item-under').show().siblings().filter(':visible').fadeOut(function() {
+        quotesArr[random]["bgImg"].addClass('item-under').show().siblings().filter(':visible').fadeOut(fadeTime * 2,function() {
             quotesArr[random]["bgImg"].removeClass('item-under');
         });;
         prevRandom = random;
